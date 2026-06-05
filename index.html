@@ -228,17 +228,16 @@ function drawMaze() {
 
   if (maze[player.y][player.x] === 2) {
     let levelTime = time;
-    let levelTime = time;
 
     let stars;
 
     if (levelTime < 10) {
     stars = "⭐⭐⭐";
-} else if (levelTime < 20) {
-  stars = "⭐⭐";
-} else {
-  stars = "⭐";
-}
+    } else if (levelTime < 20) {
+      stars = "⭐⭐";
+    } else {
+      stars = "⭐";
+    }
 
 document.getElementById("stars").textContent = stars;  
     let bestTimeKey = "bestTimeLevel" + currentLevel;
