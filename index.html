@@ -130,8 +130,10 @@ function startTimer() {
 
   if (currentLevel < levels.length) {
     maze = levels[currentLevel];
-    player = { x: 1, y: 1 };
-    alert("Level " + currentLevel + " complete! Next level!");
+player = { x: 1, y: 1 };
+startTimer();
+clearInterval(timerInterval);
+alert("You beat all the levels in " + time + " seconds!");    
   } else {
     alert("You beat all the levels!");
     currentLevel = 0;
@@ -152,11 +154,7 @@ function startTimer() {
 
 startTimer();
 drawMaze();
-maze = levels[currentLevel];
-player = { x: 1, y: 1 };
-startTimer();
-clearInterval(timerInterval);
-alert("You beat all the levels in " + time + " seconds!");    
+
   </script>
 </body>
 </html>
