@@ -101,7 +101,7 @@ let player = { x: 1, y: 1 };
 const levelCollectibles = [
   [
     { x: 3, y: 1, emoji: "⭐" },
-    { x: 5, y: 5, emoji: "💎" }
+    { x: 4, y: 5, emoji: "💎" }
   ],
   [
     { x: 2, y: 4, emoji: "🪙" },
@@ -202,13 +202,7 @@ function drawMaze() {
 }
 
     function movePlayer(dx, dy) {
-
-collectibles = collectibles.filter(item => {
-
-  if (item.x === player.x && item.y === player.y) {
-
-    score += item.points;
-    
+  
     document.getElementById("score").textContent = score;
 
     alert("You found a " + item.emoji + "!");
@@ -230,7 +224,11 @@ collectibles = collectibles.filter(item => {
         player.x = newX;
         player.y = newY;
 }  
-      
+
+collectibles = collectibles.filter(item => {
+  if (item.x === player.x && item.y === player.y) {
+    score += item.points;
+    
      if (maze[player.y][player.x] === 2) {
 
   // Save the level time before resetting
