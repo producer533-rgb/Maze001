@@ -159,20 +159,30 @@ function updateBestTimeDisplay() {
       for (let y = 0; y < maze.length; y++) {
         for (let x = 0; x < maze[y].length; x++) {
           if (maze[y][x] === 1) {
-            ctx.fillStyle = "#FF6B6B";
-          } else if (maze[y][x] === 2) {
-            ctx.fillText("🎁", x * tile + 3, y * tile + 30);
-          } else {
-            ctx.fillStyle = "white";
-          }
+  ctx.fillStyle = "#FF6B6B";
+} else {
+  ctx.fillStyle = "#FFF8DC";
+}
 
-          ctx.fillRect(x * tile, y * tile, tile, tile);
-          ctx.strokeRect(x * tile, y * tile, tile, tile);
-        }
-      }
+ctx.fillRect(x * tile, y * tile, tile, tile);
+ctx.strokeRect(x * tile, y * tile, tile, tile);
 
-      ctx.fillStyle = "30px Arial";
-      ctx.fillText("🦖", player.x * tile + 3, player.y * tile + 30);
+if (maze[y][x] === 2) {
+  ctx.font = "36px Arial";
+  ctx.fillText("🎁", x * tile + 2, y * tile + 34);
+}
+
+collectibles.forEach(item => {
+  ctx.font = "30px Arial";
+  ctx.fillText(
+    item.emoji,
+    item.x * tile + 3,
+    item.y * tile + 30
+  );
+});
+          
+      ctx.font = "40px Arial";
+      ctx.fillText("🦖", player.x * tile + 2, player.y * tile + 34);
     }
 
     function movePlayer(dx, dy) {
@@ -217,8 +227,10 @@ const levelCollectibles = [
 ];
 
 let collectibles =
-  JSON.parse(JSON.stringify(levelCollectibles[currentLevel]));      
+  JSON.parse(JSON.stringify(levelCollectibles[currentLevel])); 
 
+let score = 0;     
+      
      if (maze[player.y][player.x] === 2) {
 
   // Save the level time before resetting
@@ -254,8 +266,6 @@ let collectibles = [
   { x: 5, y: 5, emoji: "💎" },
   { x: 8, y: 7, emoji: "🪙" }
 ];
-
-let score = 0;
        
 document.getElementById("stars").textContent = stars;
        
