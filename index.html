@@ -260,6 +260,9 @@ function drawMaze() {
       maze = levels[currentLevel];
       player = { x: 1, y: 1 };
       collectibles = JSON.parse(JSON.stringify(levelCollectibles[currentLevel]));
+     
+      score = 0;
+      document.getElementById("score").textContent = score;
 
       clearInterval(timerInterval);
       time = 0;
