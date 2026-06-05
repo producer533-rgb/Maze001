@@ -110,6 +110,10 @@ const levelCollectibles = [
 
 let collectibles = JSON.parse(JSON.stringify(levelCollectibles[currentLevel])); 
 let score = 0;    
+
+const collectSound = new Audio("collect.mp3");
+const winSound = new Audio("win.mp3");
+const moveSound = new Audio("move.mp3");
     
 let time = 0;
 let timerInterval;
