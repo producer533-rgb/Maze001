@@ -64,6 +64,9 @@ button {
     const tile = 40;
     const wallImage = new Image();
     wallImage.src = "wall.png";
+
+    const pathImage = new Image();
+    pathImage.src = "path.png";
     
     // 1 = wall, 0 = path, 2 = goal
     const levels = [
@@ -184,8 +187,7 @@ function drawMaze() {
 if (maze[y][x] === 1) {
   ctx.drawImage(wallImage, x * tile, y * tile, tile, tile);
 } else {
-  ctx.fillStyle = "#FFF8DC";
-  ctx.fillRect(x * tile, y * tile, tile, tile);
+  ctx.drawImage(pathImage, x * tile, y * tile, tile, tile);
 }
 
 ctx.strokeRect(x * tile, y * tile, tile, tile);
