@@ -23,6 +23,10 @@
     <button onclick="movePlayer(1, 0)">➡️</button>
   </div>
 </div>
+
+<button id="restartButton" onclick="restartGame()" style="display:none;">
+  Play Again from Level 1
+</button>
   
   <style>
 button {
@@ -33,10 +37,6 @@ button {
   border-radius: 25px;
   touch-action: manipulation;
 }
-
-<button id="restartButton" onclick="restartGame()" style="display:none;">
-  Play Again from Level 1
-</button>
     
 .controls button {
   font-size: min(8vw, 60px);
