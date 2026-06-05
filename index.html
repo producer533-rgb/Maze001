@@ -96,20 +96,7 @@ button {
 
 let currentLevel = 0;
 let maze = levels[currentLevel];
-let player = { x: 1, y: 1 };
-let levelTime = time;
-
-let stars;
-
-if (levelTime < 10) {
-  stars = "⭐⭐⭐";
-} else if (levelTime < 20) {
-  stars = "⭐⭐";
-} else {
-  stars = "⭐";
-}
-
-document.getElementById("stars").textContent = stars;    
+let player = { x: 1, y: 1 };  
 
 const levelCollectibles = [
   [
@@ -241,6 +228,19 @@ function drawMaze() {
 
   if (maze[player.y][player.x] === 2) {
     let levelTime = time;
+    let levelTime = time;
+
+    let stars;
+
+    if (levelTime < 10) {
+    stars = "⭐⭐⭐";
+} else if (levelTime < 20) {
+  stars = "⭐⭐";
+} else {
+  stars = "⭐";
+}
+
+document.getElementById("stars").textContent = stars;  
     let bestTimeKey = "bestTimeLevel" + currentLevel;
     let savedBestTime = localStorage.getItem(bestTimeKey);
 
