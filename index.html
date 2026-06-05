@@ -126,17 +126,38 @@ function startTimer() {
       }
 
      if (maze[player.y][player.x] === 2) {
+
+  // Save the level time before resetting
+  let levelTime = time;
+
   currentLevel++;
 
   if (currentLevel < levels.length) {
-    maze = levels[currentLevel];
-player = { x: 1, y: 1 };
-    
-startTimer();
-drawMaze();
 
-alert("Level " + currentLevel + " complete!");    
-    }
+    alert("Level " + currentLevel + " complete!\nTime: " + levelTime + " seconds");
+
+    maze = levels[currentLevel];
+    player = { x: 1, y: 1 };
+
+    startTimer();   // Reset timer for next level
+    drawMaze();
+
+  } else {
+
+    clearInterval(timerInterval);
+
+    alert("You beat all the levels!\nFinal Level Time: " + levelTime + " seconds");
+
+    currentLevel = 0;
+    maze = levels[currentLevel];
+    player = { x: 1, y: 1 };
+
+    startTimer();   // Start fresh game timer
+    drawMaze();
+  }
+
+  return;
+}
 
     document.addEventListener("keydown", function(event) {
       if (event.key === "ArrowUp") movePlayer(0, -1);
