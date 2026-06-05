@@ -251,7 +251,11 @@ document.getElementById("stars").textContent = stars;
     currentLevel++;
 
     if (currentLevel < levels.length) {
-      alert("Level " + currentLevel + " complete!\nTime: " + levelTime + " seconds");
+      alert(
+        "Level " + currentLevel + " complete!" +
+        "\nTime: " + levelTime + " seconds" +
+        "\nStars: " + stars
+      );
 
       maze = levels[currentLevel];
       player = { x: 1, y: 1 };
