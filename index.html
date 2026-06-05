@@ -8,12 +8,17 @@
   </style>
 </head>
 <body>
-  <h1>Maze Game</h1>
-  <p>Use arrow keys or tap the buttons to reach the green square.</p>
+  <h1>🦖 Dino Maze Adventure 🦖</h1>
+  <p>Help Dino find the treasure!</p>
   <p>Time: <span id="timer">0</span> seconds</p>
   <p>Best Time This Level: <span id="bestTime">None yet</span></p>
+  <p>Score: <span id="score">0</span></p>
   <canvas id="game" width="400" height="400"></canvas>
 
+  <h2 id="levelDisplay">Level 1</h2>
+
+  <p id="stars">⭐⭐⭐</p>
+  
 <div class="controls">
   <button onclick="movePlayer(0, -1)">⬆️</button>
 
@@ -100,6 +105,9 @@ let bestTime = localStorage.getItem("bestTime");
 document.getElementById("bestTime").textContent =
   bestTime ? bestTime + " seconds" : "None yet";
 
+document.getElementById("levelDisplay").textContent =
+  "Level " + (currentLevel + 1);    
+
 function startTimer() {
   clearInterval(timerInterval);
 
@@ -128,6 +136,14 @@ function restartGame() {
 
   drawMaze();
   updateBestTimeDisplay();
+  collectibles.forEach(item => {
+  ctx.font = "30px Arial";
+  ctx.fillText(
+    item.emoji,
+    item.x * tile + 3,
+    item.y * tile + 30
+  );
+});
 }
     
 function updateBestTimeDisplay() {
@@ -143,9 +159,9 @@ function updateBestTimeDisplay() {
       for (let y = 0; y < maze.length; y++) {
         for (let x = 0; x < maze[y].length; x++) {
           if (maze[y][x] === 1) {
-            ctx.fillStyle = "black";
+            ctx.fillStyle = "#FF6B6B";
           } else if (maze[y][x] === 2) {
-            ctx.fillStyle = "green";
+            ctx.fillText("🎁", x * tile + 3, y * tile + 30);
           } else {
             ctx.fillStyle = "white";
           }
@@ -155,12 +171,28 @@ function updateBestTimeDisplay() {
         }
       }
 
-      ctx.fillStyle = "blue";
-      ctx.fillRect(player.x * tile + 8, player.y * tile + 8, tile - 16, tile - 16);
+      ctx.fillStyle = "30px Arial";
+      ctx.fillText("🦖", player.x * tile + 3, player.y * tile + 30);
     }
 
     function movePlayer(dx, dy) {
 
+collectibles = collectibles.filter(item => {
+
+  if (item.x === player.x && item.y === player.y) {
+
+    score += item.points;
+    
+    document.getElementById("score").textContent = score;
+
+    alert("You found a " + item.emoji + "!");
+
+    return false; // remove collectible
+  }
+
+  return true;
+});
+      
   if (!timerStarted) {
     startTimer();
   }
@@ -173,12 +205,29 @@ function updateBestTimeDisplay() {
         player.y = newY;
 }
 
+const levelCollectibles = [
+  [
+    { x: 3, y: 1, emoji: "⭐" },
+    { x: 5, y: 5, emoji: "💎" }
+  ],
+  [
+    { x: 2, y: 4, emoji: "🪙" },
+    { x: 7, y: 7, emoji: "⭐" }
+  ]
+];
+
+let collectibles =
+  JSON.parse(JSON.stringify(levelCollectibles[currentLevel]));      
+
      if (maze[player.y][player.x] === 2) {
 
   // Save the level time before resetting
   let levelTime = time;
   let bestTimeKey = "bestTimeLevel" + currentLevel;
 let savedBestTime = localStorage.getItem(bestTimeKey);
+
+collectibles =
+  JSON.parse(JSON.stringify(levelCollectibles[currentLevel]));       
 
 if (!savedBestTime || levelTime < Number(savedBestTime)) {
   localStorage.setItem(bestTimeKey, levelTime);
@@ -191,6 +240,24 @@ if (!bestTime || levelTime < bestTime) {
   document.getElementById("bestTime").textContent = bestTime + " seconds";
   alert("New high score! " + bestTime + " seconds");
 }
+
+if (levelTime < 10) {
+  stars = "⭐⭐⭐";
+} else if (levelTime < 20) {
+  stars = "⭐⭐";
+} else {
+  stars = "⭐";
+}
+
+let collectibles = [
+  { x: 3, y: 1, emoji: "⭐" },
+  { x: 5, y: 5, emoji: "💎" },
+  { x: 8, y: 7, emoji: "🪙" }
+];
+
+let score = 0;
+       
+document.getElementById("stars").textContent = stars;
        
   currentLevel++;
 
@@ -213,7 +280,7 @@ if (!bestTime || levelTime < bestTime) {
 
   clearInterval(timerInterval);
 
-  alert("You beat all the levels!\nFinal Level Time: " + levelTime + " seconds");
+  alert("🎉 Great Job! 🎉\nYou finished Level " + currentLevel);
 
   document.getElementById("restartButton").style.display = "inline-block";
 
