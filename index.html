@@ -13,21 +13,31 @@
 
   <canvas id="game" width="400" height="400"></canvas>
 
-  <div style="margin-top: 20px;">
-    <button onclick="movePlayer(0, -1)">⬆️</button><br>
+<div class="controls">
+  <button onclick="movePlayer(0, -1)">⬆️</button>
+
+  <div>
     <button onclick="movePlayer(-1, 0)">⬅️</button>
     <button onclick="movePlayer(0, 1)">⬇️</button>
     <button onclick="movePlayer(1, 0)">➡️</button>
   </div>
+</div>
 
+.controls button {
+  font-size: min(8vw, 60px);
+  width: min(22vw, 140px);
+  height: min(22vw, 140px);
+}
+  
   <style>
-    button {
-      font-size: 30px;
-      width: 70px;
-      height: 70px;
-      margin: 5px;
-      border-radius: 12px;
-    }
+button {
+  font-size: 60px;
+  width: 150px;
+  height: 150px;
+  margin: 10px;
+  border-radius: 25px;
+  touch-action: manipulation;
+}
   </style>
 
 
