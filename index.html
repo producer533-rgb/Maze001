@@ -231,7 +231,6 @@ function drawMaze() {
   });
 
   if (maze[player.y][player.x] === 2) {
-    winSound.play();
    let levelTime = time;
 
    let maxPoints = levelCollectibles[currentLevel]
@@ -255,9 +254,13 @@ function drawMaze() {
       alert("New best time for Level " + (currentLevel + 1) + ": " + levelTime + " seconds!");
     }
 
+    winSound.play();
+
+    setTimeout(() => {
+
     currentLevel++;
 
-    if (currentLevel < levels.length) {
+  if (currentLevel < levels.length) {
       alert(
         "Level " + currentLevel + " complete!" +
         "\nTime: " + levelTime + " seconds" +
@@ -289,7 +292,7 @@ function drawMaze() {
       document.getElementById("restartButton").style.display = "inline-block";
       return;
     }
-  }
+  }, 1500); // Wait 1.5 seconds before loading next level
 
   drawMaze();
 } 
