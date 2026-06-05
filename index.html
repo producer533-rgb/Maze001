@@ -48,20 +48,37 @@ button {
     const tile = 40;
 
     // 1 = wall, 0 = path, 2 = goal
-    const maze = [
-      [1,1,1,1,1,1,1,1,1,1],
-      [1,0,0,0,1,0,0,0,2,1],
-      [1,0,1,0,1,0,1,1,0,1],
-      [1,0,1,0,0,0,0,1,0,1],
-      [1,0,1,1,1,1,0,1,0,1],
-      [1,0,0,0,0,1,0,0,0,1],
-      [1,1,1,1,0,1,1,1,0,1],
-      [1,0,0,1,0,0,0,1,0,1],
-      [1,0,0,0,0,1,0,0,0,1],
-      [1,1,1,1,1,1,1,1,1,1]
-    ];
+    const levels = [
+  [
+    [1,1,1,1,1,1,1,1,1,1],
+    [1,0,0,0,1,0,0,0,2,1],
+    [1,0,1,0,1,0,1,1,0,1],
+    [1,0,1,0,0,0,0,1,0,1],
+    [1,0,1,1,1,1,0,1,0,1],
+    [1,0,0,0,0,1,0,0,0,1],
+    [1,1,1,1,0,1,1,1,0,1],
+    [1,0,0,1,0,0,0,1,0,1],
+    [1,0,0,0,0,1,0,0,0,1],
+    [1,1,1,1,1,1,1,1,1,1]
+  ],
 
-    let player = { x: 1, y: 1 };
+  [
+    [1,1,1,1,1,1,1,1,1,1],
+    [1,0,1,0,0,0,1,0,2,1],
+    [1,0,1,0,1,0,1,0,1,1],
+    [1,0,0,0,1,0,0,0,0,1],
+    [1,1,1,0,1,1,1,1,0,1],
+    [1,0,0,0,0,0,0,1,0,1],
+    [1,0,1,1,1,1,0,1,0,1],
+    [1,0,0,0,0,1,0,0,0,1],
+    [1,1,1,1,0,0,0,1,0,1],
+    [1,1,1,1,1,1,1,1,1,1]
+  ]
+];
+
+let currentLevel = 0;
+let maze = levels[currentLevel];
+let player = { x: 1, y: 1 };
 
     function drawMaze() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -94,9 +111,20 @@ button {
         player.y = newY;
       }
 
-      if (maze[player.y][player.x] === 2) {
-        setTimeout(() => alert("You win!"), 100);
-      }
+     if (maze[player.y][player.x] === 2) {
+  currentLevel++;
+
+  if (currentLevel < levels.length) {
+    maze = levels[currentLevel];
+    player = { x: 1, y: 1 };
+    alert("Level " + currentLevel + " complete! Next level!");
+  } else {
+    alert("You beat all the levels!");
+    currentLevel = 0;
+    maze = levels[currentLevel];
+    player = { x: 1, y: 1 };
+  }
+}
 
       drawMaze();
     }
