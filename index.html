@@ -34,6 +34,10 @@ button {
   touch-action: manipulation;
 }
 
+<button id="restartButton" onclick="restartGame()" style="display:none;">
+  Play Again from Level 1
+</button>
+    
 .controls button {
   font-size: min(8vw, 60px);
   width: min(22vw, 140px);
@@ -102,6 +106,22 @@ function startTimer() {
   }, 1000);
 } 
 
+function restartGame() {
+  currentLevel = 0;
+  maze = levels[currentLevel];
+  player = { x: 1, y: 1 };
+
+  clearInterval(timerInterval);
+  time = 0;
+  timerStarted = false;
+  document.getElementById("timer").textContent = 0;
+
+  document.getElementById("restartButton").style.display = "none";
+
+  drawMaze();
+  updateBestTimeDisplay();
+}
+    
 function updateBestTimeDisplay() {
   let savedBestTime = localStorage.getItem("bestTimeLevel" + currentLevel);
 
@@ -179,23 +199,14 @@ if (!bestTime || levelTime < bestTime) {
 
   } else {
 
-    clearInterval(timerInterval);
+  clearInterval(timerInterval);
 
-    alert("You beat all the levels!\nFinal Level Time: " + levelTime + " seconds");
+  alert("You beat all the levels!\nFinal Level Time: " + levelTime + " seconds");
 
-    currentLevel = 0;
-    maze = levels[currentLevel];
-    player = { x: 1, y: 1 };
-
-   clearInterval(timerInterval);
-   time = 0;
-   timerStarted = false;
-   document.getElementById("timer").textContent = 0;
-
-    drawMaze();
-  }
+  document.getElementById("restartButton").style.display = "inline-block";
 
   return;
+}
  }
 
  drawMaze();
