@@ -42,7 +42,16 @@ button {
   font-size: min(8vw, 60px);
   width: min(22vw, 140px);
   height: min(22vw, 140px);
+}  
+
+#restartButton {
+  width: 250px;
+  height: 80px;
+  font-size: 24px;
+  margin-top: 20px;
+  border-radius: 15px;
 }    
+    
   </style>
 
 
@@ -194,6 +203,11 @@ if (!bestTime || levelTime < bestTime) {
     player = { x: 1, y: 1 };
     updateBestTimeDisplay();
 
+    clearInterval(timerInterval);
+    time = 0;
+    timerStarted = false;
+    document.getElementById("timer").textContent = 0;
+    
     startTimer();   // Reset timer for next level
     drawMaze();
 
