@@ -215,12 +215,14 @@ function drawMaze() {
   if (maze[newY][newX] !== 1) {
     player.x = newX;
     player.y = newY;
+    moveSound.play();
   }
 
   collectibles = collectibles.filter(item => {
     if (item.x === player.x && item.y === player.y) {
       score += item.points;
       document.getElementById("score").textContent = score;
+      collectSound.play();
       alert("You found a " + item.emoji + "!");
       return false;
     }
@@ -229,7 +231,8 @@ function drawMaze() {
   });
 
   if (maze[player.y][player.x] === 2) {
-    let levelTime = time;
+    winSound.play();
+   let levelTime = time;
 
    let maxPoints = levelCollectibles[currentLevel]
      .reduce((sum, item) => sum + item.points, 0);
