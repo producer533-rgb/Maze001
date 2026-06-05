@@ -100,12 +100,12 @@ let player = { x: 1, y: 1 };
 
 const levelCollectibles = [
   [
-    { x: 3, y: 1, emoji: "⭐" },
-    { x: 4, y: 5, emoji: "💎" }
+    { x: 3, y: 1, emoji: "⭐", points: 1 },
+    { x: 4, y: 5, emoji: "💎", points: 5 }
   ],
   [
-    { x: 2, y: 4, emoji: "🪙" },
-    { x: 7, y: 7, emoji: "⭐" }
+    { x: 2, y: 4, emoji: "🪙", points: 3 },
+    { x: 7, y: 7, emoji: "⭐", points: 1 }
   ]
 ];
 
@@ -202,17 +202,6 @@ function drawMaze() {
 }
 
     function movePlayer(dx, dy) {
-  
-    document.getElementById("score").textContent = score;
-
-    alert("You found a " + item.emoji + "!");
-
-    return false; // remove collectible
-  }
-  
-  return true;
-});
-      
   if (!timerStarted) {
     startTimer();
   }
@@ -220,63 +209,59 @@ function drawMaze() {
   const newX = player.x + dx;
   const newY = player.y + dy;
 
-      if (maze[newY][newX] !== 1) {
-        player.x = newX;
-        player.y = newY;
-}  
+  if (maze[newY][newX] !== 1) {
+    player.x = newX;
+    player.y = newY;
+  }
 
-collectibles = collectibles.filter(item => {
-  if (item.x === player.x && item.y === player.y) {
-    score += item.points;
-    
-     if (maze[player.y][player.x] === 2) {
+  collectibles = collectibles.filter(item => {
+    if (item.x === player.x && item.y === player.y) {
+      score += item.points;
+      document.getElementById("score").textContent = score;
+      alert("You found a " + item.emoji + "!");
+      return false;
+    }
 
-  // Save the level time before resetting
-  let levelTime = time;
-  let bestTimeKey = "bestTimeLevel" + currentLevel;
-let savedBestTime = localStorage.getItem(bestTimeKey);
+    return true;
+  });
 
-collectibles =
-  JSON.parse(JSON.stringify(levelCollectibles[currentLevel]));       
+  if (maze[player.y][player.x] === 2) {
+    let levelTime = time;
+    let bestTimeKey = "bestTimeLevel" + currentLevel;
+    let savedBestTime = localStorage.getItem(bestTimeKey);
 
-if (!savedBestTime || levelTime < Number(savedBestTime)) {
-  localStorage.setItem(bestTimeKey, levelTime);
-  alert("New best time for Level " + (currentLevel + 1) + ": " + levelTime + " seconds!");
-}     
+    if (!savedBestTime || levelTime < Number(savedBestTime)) {
+      localStorage.setItem(bestTimeKey, levelTime);
+      alert("New best time for Level " + (currentLevel + 1) + ": " + levelTime + " seconds!");
+    }
 
-if (!bestTime || levelTime < bestTime) {
-  bestTime = levelTime;
-  localStorage.setItem("bestTime", bestTime);
-  document.getElementById("bestTime").textContent = bestTime + " seconds";
-  alert("New high score! " + bestTime + " seconds");
+    currentLevel++;
+
+    if (currentLevel < levels.length) {
+      alert("Level " + currentLevel + " complete!\nTime: " + levelTime + " seconds");
+
+      maze = levels[currentLevel];
+      player = { x: 1, y: 1 };
+      collectibles = JSON.parse(JSON.stringify(levelCollectibles[currentLevel]));
+
+      clearInterval(timerInterval);
+      time = 0;
+      timerStarted = false;
+      document.getElementById("timer").textContent = 0;
+
+      updateBestTimeDisplay();
+      drawMaze();
+      return;
+    } else {
+      clearInterval(timerInterval);
+      alert("🎉 Great Job! 🎉\nYou finished all levels!");
+      document.getElementById("restartButton").style.display = "inline-block";
+      return;
+    }
+  }
+
+  drawMaze();
 }
-
-if (levelTime < 10) {
-  stars = "⭐⭐⭐";
-} else if (levelTime < 20) {
-  stars = "⭐⭐";
-} else {
-  stars = "⭐";
-}
-       
-document.getElementById("stars").textContent = stars;
-       
-  currentLevel++;
-
-  if (currentLevel < levels.length) {
-
-    alert("Level " + currentLevel + " complete!\nTime: " + levelTime + " seconds");
-
-    maze = levels[currentLevel];
-    player = { x: 1, y: 1 };
-    updateBestTimeDisplay();
-
-    clearInterval(timerInterval);
-    time = 0;
-    timerStarted = false;
-    document.getElementById("timer").textContent = 0;
-    
-    drawMaze();
 
   } else {
 
