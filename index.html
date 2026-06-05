@@ -16,8 +16,6 @@
   <canvas id="game" width="400" height="400"></canvas>
 
   <h2 id="levelDisplay">Level 1</h2>
-
-  <p id="stars">⭐⭐⭐</p>
   
 <div class="controls">
   <button onclick="movePlayer(0, -1)">⬆️</button>
@@ -229,17 +227,19 @@ function drawMaze() {
   if (maze[player.y][player.x] === 2) {
     let levelTime = time;
 
-    let stars;
+   let maxPoints = levelCollectibles[currentLevel]
+     .reduce((sum, item) => sum + item.points, 0);
 
-    if (levelTime < 10) {
-    stars = "⭐⭐⭐";
-    } else if (levelTime < 20) {
-      stars = "⭐⭐";
-    } else {
-      stars = "⭐";
-    }
+   let stars;
 
-document.getElementById("stars").textContent = stars;  
+   if (score >= maxPoints) {
+     stars = "⭐⭐⭐";
+   } else if (score >= maxPoints * 0.5) {
+     stars = "⭐⭐";
+   } else {
+     stars = "⭐";
+   }
+
     let bestTimeKey = "bestTimeLevel" + currentLevel;
     let savedBestTime = localStorage.getItem(bestTimeKey);
 
