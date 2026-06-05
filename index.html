@@ -96,7 +96,21 @@ button {
 
 let currentLevel = 0;
 let maze = levels[currentLevel];
-let player = { x: 1, y: 1 };   
+let player = { x: 1, y: 1 };
+
+const levelCollectibles = [
+  [
+    { x: 3, y: 1, emoji: "⭐" },
+    { x: 5, y: 5, emoji: "💎" }
+  ],
+  [
+    { x: 2, y: 4, emoji: "🪙" },
+    { x: 7, y: 7, emoji: "⭐" }
+  ]
+];
+
+let collectibles = JSON.parse(JSON.stringify(levelCollectibles[currentLevel])); 
+let score = 0;    
     
 let time = 0;
 let timerInterval;
@@ -132,21 +146,11 @@ function restartGame() {
   timerStarted = false;
   document.getElementById("timer").textContent = 0;
 
-  document.getElementById("restartButton").style.display = "none";
+  document.getElementById("restartButton").style.display = "none"; 
 
-const levelCollectibles = [
-  [
-    { x: 3, y: 1, emoji: "⭐" },
-    { x: 5, y: 5, emoji: "💎" }
-  ],
-  [
-    { x: 2, y: 4, emoji: "🪙" },
-    { x: 7, y: 7, emoji: "⭐" }
-  ]
-];
-
-let collectibles = JSON.parse(JSON.stringify(levelCollectibles[currentLevel])); 
-let score = 0; 
+  collectibles = JSON.parse(JSON.stringify(levelCollectibles[currentLevel]));
+  score = 0;
+  document.getElementById("score").textContent = score;
   
   drawMaze();
   updateBestTimeDisplay();
