@@ -62,7 +62,9 @@ button {
     const ctx = canvas.getContext("2d");
 
     const tile = 40;
-
+    const wallImage = new Image();
+    wallImage.src = "wall.png";
+    
     // 1 = wall, 0 = path, 2 = goal
     const levels = [
   [
@@ -179,14 +181,14 @@ function drawMaze() {
 
   for (let y = 0; y < maze.length; y++) {
     for (let x = 0; x < maze[y].length; x++) {
-      if (maze[y][x] === 1) {
-        ctx.fillStyle = "#FF6B6B";
-      } else {
-        ctx.fillStyle = "#FFF8DC";
-      }
+if (maze[y][x] === 1) {
+  ctx.drawImage(wallImage, x * tile, y * tile, tile, tile);
+} else {
+  ctx.fillStyle = "#FFF8DC";
+  ctx.fillRect(x * tile, y * tile, tile, tile);
+}
 
-      ctx.fillRect(x * tile, y * tile, tile, tile);
-      ctx.strokeRect(x * tile, y * tile, tile, tile);
+ctx.strokeRect(x * tile, y * tile, tile, tile);
 
       if (maze[y][x] === 2) {
         ctx.font = "36px Arial";
