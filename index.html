@@ -97,6 +97,19 @@ button {
 let currentLevel = 0;
 let maze = levels[currentLevel];
 let player = { x: 1, y: 1 };
+let levelTime = time;
+
+let stars;
+
+if (levelTime < 10) {
+  stars = "⭐⭐⭐";
+} else if (levelTime < 20) {
+  stars = "⭐⭐";
+} else {
+  stars = "⭐";
+}
+
+document.getElementById("stars").textContent = stars;    
 
 const levelCollectibles = [
   [
@@ -255,7 +268,11 @@ function drawMaze() {
       return;
     } else {
       clearInterval(timerInterval);
-      alert("🎉 Great Job! 🎉\nYou finished all levels!");
+      alert(
+        "Level " + (currentLevel + 1) + " complete!" +
+        "\nTime: " + levelTime + " seconds" +
+        "\nStars: " + stars
+);
       document.getElementById("restartButton").style.display = "inline-block";
       return;
     }
