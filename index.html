@@ -157,8 +157,12 @@ function startTimer() {
   }
 
   return;
-}
+ }
 
+ drawMaze();
+
+} 
+    
     document.addEventListener("keydown", function(event) {
       if (event.key === "ArrowUp") movePlayer(0, -1);
       if (event.key === "ArrowDown") movePlayer(0, 1);
