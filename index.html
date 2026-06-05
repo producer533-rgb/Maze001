@@ -10,7 +10,7 @@
 <body>
   <h1>Maze Game</h1>
   <p>Use arrow keys or tap the buttons to reach the green square.</p>
-
+  <p>Time: <span id="timer">0</span> seconds</p>
   <canvas id="game" width="400" height="400"></canvas>
 
 <div class="controls">
@@ -137,6 +137,27 @@ let player = { x: 1, y: 1 };
     });
 
     drawMaze();
+
+  let time = 0;
+let timerInterval;
+
+function startTimer() {
+  clearInterval(timerInterval);
+  time = 0;
+  document.getElementById("timer").textContent = time;
+
+  timerInterval = setInterval(function() {
+    time++;
+    document.getElementById("timer").textContent = time;
+  }, 1000);
+} 
+startTimer();
+drawMaze();
+maze = levels[currentLevel];
+player = { x: 1, y: 1 };
+startTimer();
+clearInterval(timerInterval);
+alert("You beat all the levels in " + time + " seconds!");    
   </script>
 </body>
 </html>
