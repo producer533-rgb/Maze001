@@ -134,6 +134,20 @@ function restartGame() {
 
   document.getElementById("restartButton").style.display = "none";
 
+const levelCollectibles = [
+  [
+    { x: 3, y: 1, emoji: "⭐" },
+    { x: 5, y: 5, emoji: "💎" }
+  ],
+  [
+    { x: 2, y: 4, emoji: "🪙" },
+    { x: 7, y: 7, emoji: "⭐" }
+  ]
+];
+
+let collectibles = JSON.parse(JSON.stringify(levelCollectibles[currentLevel])); 
+let score = 0; 
+  
   drawMaze();
   updateBestTimeDisplay();
   collectibles.forEach(item => {
@@ -197,20 +211,6 @@ collectibles = collectibles.filter(item => {
 
     return false; // remove collectible
   }
-
-const levelCollectibles = [
-  [
-    { x: 3, y: 1, emoji: "⭐" },
-    { x: 5, y: 5, emoji: "💎" }
-  ],
-  [
-    { x: 2, y: 4, emoji: "🪙" },
-    { x: 7, y: 7, emoji: "⭐" }
-  ]
-];
-
-let collectibles =
-  JSON.parse(JSON.stringify(levelCollectibles[currentLevel])); 
   
   return true;
 });
@@ -225,9 +225,7 @@ let collectibles =
       if (maze[newY][newX] !== 1) {
         player.x = newX;
         player.y = newY;
-}
-
-let score = 0;     
+}  
       
      if (maze[player.y][player.x] === 2) {
 
@@ -258,12 +256,6 @@ if (levelTime < 10) {
 } else {
   stars = "⭐";
 }
-
-let collectibles = [
-  { x: 3, y: 1, emoji: "⭐" },
-  { x: 5, y: 5, emoji: "💎" },
-  { x: 8, y: 7, emoji: "🪙" }
-];
        
 document.getElementById("stars").textContent = stars;
        
