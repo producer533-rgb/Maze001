@@ -161,7 +161,11 @@ function startTimer() {
     maze = levels[currentLevel];
     player = { x: 1, y: 1 };
 
-    startTimer();   // Start fresh game timer
+   clearInterval(timerInterval);
+   time = 0;
+   timerStarted = false;
+   document.getElementById("timer").textContent = 0;
+
     drawMaze();
   }
 
@@ -179,7 +183,6 @@ function startTimer() {
       if (event.key === "ArrowRight") movePlayer(1, 0);
     });
 
-startTimer();
 drawMaze();
 
   </script>
