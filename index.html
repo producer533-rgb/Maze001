@@ -11,7 +11,7 @@
   <h1>Maze Game</h1>
   <p>Use arrow keys or tap the buttons to reach the green square.</p>
   <p>Time: <span id="timer">0</span> seconds</p>
-  <p>Best Time: <span id="bestTime">None yet</span></p>
+  <p>Best Time This Level: <span id="bestTime">None yet</span></p>
   <canvas id="game" width="400" height="400"></canvas>
 
 <div class="controls">
@@ -101,6 +101,13 @@ function startTimer() {
     document.getElementById("timer").textContent = time;
   }, 1000);
 } 
+
+function updateBestTimeDisplay() {
+  let savedBestTime = localStorage.getItem("bestTimeLevel" + currentLevel);
+
+  document.getElementById("bestTime").textContent =
+    savedBestTime ? savedBestTime + " seconds" : "None yet";
+}
     
     function drawMaze() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -142,6 +149,13 @@ function startTimer() {
 
   // Save the level time before resetting
   let levelTime = time;
+  let bestTimeKey = "bestTimeLevel" + currentLevel;
+let savedBestTime = localStorage.getItem(bestTimeKey);
+
+if (!savedBestTime || levelTime < Number(savedBestTime)) {
+  localStorage.setItem(bestTimeKey, levelTime);
+  alert("New best time for Level " + (currentLevel + 1) + ": " + levelTime + " seconds!");
+}     
 
 if (!bestTime || levelTime < bestTime) {
   bestTime = levelTime;
@@ -158,6 +172,7 @@ if (!bestTime || levelTime < bestTime) {
 
     maze = levels[currentLevel];
     player = { x: 1, y: 1 };
+    updateBestTimeDisplay();
 
     startTimer();   // Reset timer for next level
     drawMaze();
@@ -195,6 +210,7 @@ if (!bestTime || levelTime < bestTime) {
     });
 
 drawMaze();
+updateBestTimeDisplay();
 
   </script>
 </body>
