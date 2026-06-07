@@ -309,10 +309,12 @@ else {
     return true;
   });
 
-  if (maze[player.y][player.x] === 2) {
-    levelChanging = true;
+if (maze[player.y][player.x] === 2) {
+  levelChanging = true;
 
-   let maxPoints = levelCollectibles[currentLevel]
+  let levelTime = time;
+
+  let maxPoints = levelCollectibles[currentLevel]
      .reduce((sum, item) => sum + item.points, 0);
 
    let stars;
