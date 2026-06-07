@@ -203,7 +203,7 @@ function restartGame() {
 
   startTimer();
 
-  document.getElementById("restartButton").style.display = "none"; 
+  document.getElementById("messageBox").style.display = "none";
 
   collectibles = JSON.parse(JSON.stringify(levelCollectibles[currentLevel]));
   score = 0;
@@ -358,7 +358,6 @@ showMessage(
   "<br><br>" +
   "<button onclick='restartGame()'>Play Again From Level 1</button>"
 );
-      document.getElementById("restartButton").style.display = "inline-block";
       return;
     }
   }, 1500); // Wait 1.5 seconds before loading next level
