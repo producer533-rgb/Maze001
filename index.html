@@ -190,8 +190,6 @@ if (maze[y][x] === 1) {
   ctx.drawImage(pathImage, x * tile, y * tile, tile, tile);
 }
 
-ctx.strokeRect(x * tile, y * tile, tile, tile);
-
       if (maze[y][x] === 2) {
         ctx.font = "36px Arial";
         ctx.fillText("🎁", x * tile + 2, y * tile + 34);
