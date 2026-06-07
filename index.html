@@ -13,6 +13,9 @@
   <p>Time: <span id="timer">0</span> seconds</p>
   <p>Best Time This Level: <span id="bestTime">None yet</span></p>
   <p>Score: <span id="score">0</span></p>
+
+  <div id="messageBox"></div>
+  
   <canvas id="game" width="400" height="400"></canvas>
 
   <h2 id="levelDisplay">Level 1</h2>
@@ -52,7 +55,19 @@ button {
   height: auto;
   padding: 15px 30px;
   font-size: 24px;
-} 
+}
+
+    #messageBox {
+  display: none;
+  margin: 10px auto;
+  padding: 15px;
+  width: 300px;
+  font-size: 24px;
+  font-weight: bold;
+  background: gold;
+  border: 4px solid orange;
+  border-radius: 20px;
+}
     
   </style>
 
@@ -171,6 +186,17 @@ function restartGame() {
   );
 });
 }
+
+function showMessage(text) {
+  const box = document.getElementById("messageBox");
+
+  box.textContent = text;
+  box.style.display = "block";
+
+  setTimeout(() => {
+    box.style.display = "none";
+  }, 1500);
+}
     
 function updateBestTimeDisplay() {
   let savedBestTime = localStorage.getItem("bestTimeLevel" + currentLevel);
@@ -225,7 +251,15 @@ if (maze[y][x] === 1) {
       score += item.points;
       document.getElementById("score").textContent = score;
       collectSound.play();
-      alert("You found a " + item.emoji + "!");
+      if (item.emoji === "💎") {
+  showMessage("💎 WOW! A Sparkly Gem!");
+}
+else if (item.emoji === "🪙") {
+  showMessage("🪙 You found a Gold Coin!");
+}
+else {
+  showMessage("⭐ Great job! You found a Star!");
+}
       return false;
     }
 
