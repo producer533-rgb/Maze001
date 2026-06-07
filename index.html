@@ -14,9 +14,11 @@
   <p>Best Time This Level: <span id="bestTime">None yet</span></p>
   <p>Score: <span id="score">0</span></p>
 
-  <div id="messageBox"></div>
-  
+<div id="gameArea">
   <canvas id="game" width="400" height="400"></canvas>
+
+  <div id="messageBox"></div>
+</div>
 
   <h2 id="levelDisplay">Level 1</h2>
   
@@ -57,16 +59,29 @@ button {
   font-size: 24px;
 }
 
-    #messageBox {
+#gameArea {
+  position: relative;
+  width: 400px;
+  height: 400px;
+  margin: 0 auto;
+}
+
+#messageBox {
   display: none;
-  margin: 10px auto;
-  padding: 15px;
-  width: 300px;
-  font-size: 24px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  
+  padding: 18px 25px;
+  width: 280px;
+  font-size: 26px;
   font-weight: bold;
+  text-align: center;
   background: gold;
   border: 4px solid orange;
   border-radius: 20px;
+  z-index: 10;
 }
     
   </style>
