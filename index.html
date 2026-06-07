@@ -336,10 +336,10 @@ else {
     currentLevel++;
 
   if (currentLevel < levels.length) {
-      showMessage(
-  "🎉 Level " + completedLevel + " Complete!<br>"
-  "Time: " + levelTime + " seconds<br>" +
-  "Stars: " + stars
+  showMessage(
+    "🎉 Level " + completedLevel + " Complete!<br>" +
+    "Time: " + levelTime + " seconds<br>" +
+    "Stars: " + stars
 );
 
       maze = levels[currentLevel];
@@ -361,7 +361,7 @@ else {
     } else {
       clearInterval(timerInterval);
 showMessage(
-  "🎉 Level " + currentLevel + " Complete!<br>" +
+  "🎉 Level " + completedLevel + " Complete!<br>" +
   "Time: " + levelTime + " seconds<br>" +
   "Stars: " + stars +
   "<br><br>" +
