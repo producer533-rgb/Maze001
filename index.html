@@ -205,7 +205,7 @@ function restartGame() {
 function showMessage(text) {
   const box = document.getElementById("messageBox");
 
-  box.textContent = text;
+  box.innerHTML = text;
   box.style.display = "block";
 }
     
@@ -311,11 +311,11 @@ else {
     currentLevel++;
 
   if (currentLevel < levels.length) {
-      alert(
-        "Level " + currentLevel + " complete!" +
-        "\nTime: " + levelTime + " seconds" +
-        "\nStars: " + stars
-      );
+      showMessage(
+  "🎉 Level " + currentLevel + " Complete!<br>" +
+  "Time: " + levelTime + " seconds<br>" +
+  "Stars: " + stars
+);
 
       maze = levels[currentLevel];
       player = { x: 1, y: 1 };
