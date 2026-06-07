@@ -193,6 +193,10 @@ function startTimer() {
 
 function restartGame() {
   currentLevel = 0;
+
+  document.getElementById("levelDisplay").textContent =
+  "Level " + (currentLevel + 1);
+  
   maze = levels[currentLevel];
   player = { x: 1, y: 1 };
 
@@ -339,7 +343,10 @@ else {
       maze = levels[currentLevel];
       player = { x: 1, y: 1 };
       collectibles = JSON.parse(JSON.stringify(levelCollectibles[currentLevel]));
-     
+
+      document.getElementById("levelDisplay").textContent =
+         "Level " + (currentLevel + 1);    
+    
       score = 0;
       document.getElementById("score").textContent = score;
 
