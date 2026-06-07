@@ -170,6 +170,7 @@ const moveSound = new Audio("move.mp3");
 let time = 0;
 let timerInterval;
 let timerStarted = false;
+let levelChanging = false;    
 let bestTime = localStorage.getItem("bestTime");
 document.getElementById("bestTime").textContent =
   bestTime ? bestTime + " seconds" : "None yet";
@@ -193,6 +194,7 @@ function startTimer() {
 
 function restartGame() {
   currentLevel = 0;
+  levelChanging = false;
 
   document.getElementById("levelDisplay").textContent =
   "Level " + (currentLevel + 1);
@@ -268,6 +270,10 @@ if (maze[y][x] === 1) {
 
     function movePlayer(dx, dy) {
 
+    if (levelChanging) {
+      return;
+}
+      
 document.getElementById("messageBox").style.display = "none";
       
   if (!timerStarted) {
@@ -304,7 +310,7 @@ else {
   });
 
   if (maze[player.y][player.x] === 2) {
-   let levelTime = time;
+    levelChanging = true;
 
    let maxPoints = levelCollectibles[currentLevel]
      .reduce((sum, item) => sum + item.points, 0);
@@ -356,6 +362,7 @@ else {
       startTimer();
 
       updateBestTimeDisplay();
+      levelChanging = false;
       drawMaze();
       return;
     } else {
