@@ -192,10 +192,6 @@ function showMessage(text) {
 
   box.textContent = text;
   box.style.display = "block";
-
-  setTimeout(() => {
-    box.style.display = "none";
-  }, 1500);
 }
     
 function updateBestTimeDisplay() {
@@ -233,6 +229,9 @@ if (maze[y][x] === 1) {
 }
 
     function movePlayer(dx, dy) {
+
+document.getElementById("messageBox").style.display = "none";
+      
   if (!timerStarted) {
     startTimer();
   }
