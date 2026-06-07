@@ -331,11 +331,13 @@ else {
 
     setTimeout(() => {
 
+    let completedLevel = currentLevel + 1;
+      
     currentLevel++;
 
   if (currentLevel < levels.length) {
       showMessage(
-  "🎉 Level " + currentLevel + " Complete!<br>" +
+  "🎉 Level " + completedLevel + " Complete!<br>"
   "Time: " + levelTime + " seconds<br>" +
   "Stars: " + stars
 );
