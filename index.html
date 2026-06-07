@@ -201,6 +201,8 @@ function restartGame() {
   timerStarted = false;
   document.getElementById("timer").textContent = 0;
 
+  startTimer();
+
   document.getElementById("restartButton").style.display = "none"; 
 
   collectibles = JSON.parse(JSON.stringify(levelCollectibles[currentLevel]));
@@ -342,9 +344,7 @@ else {
       document.getElementById("score").textContent = score;
 
       clearInterval(timerInterval);
-      time = 0;
-      timerStarted = false;
-      document.getElementById("timer").textContent = 0;
+      startTimer();
 
       updateBestTimeDisplay();
       drawMaze();
