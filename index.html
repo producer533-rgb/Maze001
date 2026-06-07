@@ -31,10 +31,6 @@
     <button onclick="movePlayer(1, 0)">➡️</button>
   </div>
 </div>
-
-<button id="restartButton" onclick="restartGame()" style="display:none;">
-  Play Again from Level 1
-</button>
   
   <style>
 button {
@@ -334,10 +330,12 @@ else {
       return;
     } else {
       clearInterval(timerInterval);
-      alert(
-        "Level " + (currentLevel + 1) + " complete!" +
-        "\nTime: " + levelTime + " seconds" +
-        "\nStars: " + stars
+      showMessage(
+  "🏆 You Beat Dino Maze Adventure!<br>" +
+  "Time: " + levelTime + " seconds<br>" +
+  "Stars: " + stars +
+  "<br><br>" +
+  "<button onclick='restartGame()'>Play Again From Level 1</button>"
 );
       document.getElementById("restartButton").style.display = "inline-block";
       return;
