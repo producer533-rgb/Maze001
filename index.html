@@ -406,6 +406,9 @@ if (maze[player.y][player.x] === 2) {
       return;
     } else {
       clearInterval(timerInterval);
+
+levelChanging = false;
+    
 showFinalMessage(
   "🎉 Level " + completedLevel + " Complete!<br>" +
   "Time: " + levelTime + " seconds<br>" +
