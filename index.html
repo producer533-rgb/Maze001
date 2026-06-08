@@ -63,14 +63,33 @@ button {
   margin: 0 auto;
 }
 
+#messageBox {
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 18px 25px;
+  width: 280px;
+  font-size: 26px;
+  font-weight: bold;
+  text-align: center;
+  background: gold;
+  border: 4px solid orange;
+  border-radius: 20px;
+  z-index: 10;
+}
+
 #messageBox button {
   font-size: 20px;
+  width: auto;
+  height: auto;
   padding: 10px 25px;
   border-radius: 12px;
   border: none;
   cursor: pointer;
 }
-  
+    
   padding: 18px 25px;
   width: 280px;
   font-size: 26px;
@@ -210,7 +229,9 @@ function restartGame() {
 
   startTimer();
 
-  document.getElementById("messageBox").style.display = "none";
+if (document.getElementById("messageBox").style.display === "block") {
+  return;
+}
 
   collectibles = JSON.parse(JSON.stringify(levelCollectibles[currentLevel]));
   score = 0;
