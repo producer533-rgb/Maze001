@@ -367,7 +367,12 @@ if (maze[player.y][player.x] === 2) {
 
     if (!savedBestTime || levelTime < Number(savedBestTime)) {
       localStorage.setItem(bestTimeKey, levelTime);
-      alert("New best time for Level " + (currentLevel + 1) + ": " + levelTime + " seconds!");
+      
+      showMessage(
+  "⏱️ New Best Time!<br>" +
+  "Level " + (currentLevel + 1) + "<br>" +
+  levelTime + " seconds"
+);
     }
 
     winSound.play();
@@ -379,11 +384,16 @@ if (maze[player.y][player.x] === 2) {
     currentLevel++;
 
   if (currentLevel < levels.length) {
-  showMessage(
-    "🎉 Level " + completedLevel + " Complete!<br>" +
-    "Time: " + levelTime + " seconds<br>" +
-    "Stars: " + stars
-);
+  let message =
+  "🎉 Level " + completedLevel + " Complete!<br>" +
+  "Time: " + levelTime + " seconds<br>" +
+  "Stars: " + stars;
+
+if (!savedBestTime || levelTime < Number(savedBestTime)) {
+  message += "<br><br>⏱️ NEW BEST TIME!";
+}
+
+showMessage(message);
 
       maze = levels[currentLevel];
       player = { x: 1, y: 1 };
