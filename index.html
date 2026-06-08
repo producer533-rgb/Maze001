@@ -365,15 +365,9 @@ if (maze[player.y][player.x] === 2) {
     let bestTimeKey = "bestTimeLevel" + currentLevel;
     let savedBestTime = localStorage.getItem(bestTimeKey);
 
-    if (!savedBestTime || levelTime < Number(savedBestTime)) {
-      localStorage.setItem(bestTimeKey, levelTime);
-      
-      showMessage(
-  "⏱️ New Best Time!<br>" +
-  "Level " + (currentLevel + 1) + "<br>" +
-  levelTime + " seconds"
-);
-    }
+  if (!savedBestTime || levelTime < Number(savedBestTime)) {
+  localStorage.setItem(bestTimeKey, levelTime);
+}
 
     winSound.play();
 
