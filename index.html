@@ -229,9 +229,7 @@ function restartGame() {
 
   startTimer();
 
-if (document.getElementById("messageBox").style.display === "block") {
-  return;
-}
+  document.getElementById("messageBox").style.display = "none";
 
   collectibles = JSON.parse(JSON.stringify(levelCollectibles[currentLevel]));
   score = 0;
