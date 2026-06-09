@@ -506,13 +506,13 @@ if (
   levelPathTiles[currentLevel] &&
   levelPathTiles[currentLevel][tileKey]
 ) {
-  ctx.drawImage(
-    tileImages[levelPathTiles[currentLevel][tileKey]]
-    x * tile,
-    y * tile,
-    tile,
-    tile
-  );
+ctx.drawImage(
+  tileImages[levelPathTiles[currentLevel][tileKey]],
+  x * tile,
+  y * tile,
+  tile,
+  tile
+);
 } else {
   ctx.drawImage(
     pathImage,
