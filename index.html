@@ -139,6 +139,9 @@ button {
 
     const pathImage = new Image();
     pathImage.src = "path.png";
+
+    const imageIndex =
+    Math.floor(Math.random() * pathImages.length);
     
     // 1 = wall, 0 = path, 2 = goal
     const levels = [
