@@ -137,13 +137,8 @@ button {
     const wallImage = new Image();
     wallImage.src = "wall.png";
 
-    const pathImages = [];
-
-  for (let i = 1; i <= 4; i++) {
-  const img = new Image();
-  img.src = "path" + i + ".png";
-  pathImages.push(img);
-}
+    const pathImage = new Image();
+    pathImage.src = "path.png";
 
     // 1 = wall, 0 = path, 2 = goal
     const levels = [
@@ -462,15 +457,7 @@ function drawMaze() {
 if (maze[y][x] === 1) {
   ctx.drawImage(wallImage, x * tile, y * tile, tile, tile);
 } else {
-  const imageIndex = (x + y) % pathImages.length;
-
-ctx.drawImage(
-  pathImages[imageIndex],
-  x * tile,
-  y * tile,
-  tile,
-  tile
-);
+ctx.drawImage(pathImage, x * tile, y * tile, tile, tile);
 }
 
       if (maze[y][x] === 2) {
