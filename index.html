@@ -145,9 +145,9 @@ const levelPathTiles = [
   // Level 1
   {
     "1,1": "grass.png",
-    "2,1": "grass.png",
-    "3,1": "footprints.png",
-    "4,1": "flowers.png"
+    "2,1": "path_start.png",
+    "3,1": "path_straight_h.png",
+    "4,1": "path_straight_h.png"
   },
 
   // Level 2
@@ -177,13 +177,12 @@ function loadTile(name) {
   tileImages[name] = img;
 }
 
-loadTile("grass.png");
-loadTile("footprints.png");
-loadTile("flowers.png");
-loadTile("sand.png");
-loadTile("bones.png");
-loadTile("lava.png");
-loadTile("rocks.png"); 
+loadTile("path_start.png");
+loadTile("path_straight_h.png");
+loadTile("path_straight_v.png");
+loadTile("path_corner.png");
+loadTile("path_crossroad.png");
+loadTile("path_end.png"); 
 
     // 1 = wall, 0 = path, 2 = goal
     const levels = [
