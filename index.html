@@ -140,6 +140,49 @@ button {
     const pathImage = new Image();
     pathImage.src = "path.png";
 
+const levelPathTiles = [
+
+  // Level 1
+  {
+    "1,1": "grass.png",
+    "2,1": "grass.png",
+    "3,1": "footprints.png",
+    "4,1": "flowers.png"
+  },
+
+  // Level 2
+  {
+    "1,1": "sand.png",
+    "2,1": "sand.png",
+    "3,1": "bones.png",
+    "4,1": "sand.png"
+  },
+
+  // Level 3
+  {
+    "1,1": "lava.png",
+    "2,1": "lava.png",
+    "3,1": "rocks.png"
+  }
+
+  // Levels 4-10 continue here
+
+];
+
+   const tileImages = {};
+
+function loadTile(name) {
+  const img = new Image();
+  img.src = name;
+  tileImages[name] = img;
+}
+
+loadTile("path_start.png");
+loadTile("path_straight.png");
+loadTile("path_corner.png");
+loadTile("path_crossroad.png");
+loadTile("path_end.png"); 
+
     // 1 = wall, 0 = path, 2 = goal
     const levels = [
   [
@@ -457,7 +500,28 @@ function drawMaze() {
 if (maze[y][x] === 1) {
   ctx.drawImage(wallImage, x * tile, y * tile, tile, tile);
 } else {
-ctx.drawImage(pathImage, x * tile, y * tile, tile, tile);
+const tileKey = `${x},${y}`;
+
+if (
+  levelPathTiles[currentLevel] &&
+  levelPathTiles[currentLevel][tileKey]
+) {
+  ctx.drawImage(
+    tileImages[levelPathTiles[currentLevel][tileKey]]
+    x * tile,
+    y * tile,
+    tile,
+    tile
+  );
+} else {
+  ctx.drawImage(
+    pathImage,
+    x * tile,
+    y * tile,
+    tile,
+    tile
+  );
+}
 }
 
       if (maze[y][x] === 2) {
