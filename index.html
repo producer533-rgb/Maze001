@@ -811,7 +811,17 @@ const lavaTiles = {
     { x: 4, y: 5 },
     { x: 7, y: 7 }
   ]
-};    
+};
+const enemies = {
+  8: [
+    { x: 2, y: 1, startX: 2, endX: 4, y: 1, direction: 1, emoji: "🐝" }
+  ],
+  9: [
+    { x: 5, y: 5, startX: 5, endX: 8, y: 5, direction: 1, emoji: "👻" }
+  ]
+};
+
+setInterval(moveEnemies, 1000);    
 let hasKey = false;
 
 const levelKeys = {
@@ -941,6 +951,22 @@ function updateBestTimeDisplay() {
   document.getElementById("bestTime").textContent =
     savedBestTime ? savedBestTime + " seconds" : "None yet";
 }
+
+function moveEnemies() {
+  if (!enemies[currentLevel]) {
+    return;
+  }
+
+  enemies[currentLevel].forEach(enemy => {
+    enemy.x += enemy.direction;
+
+    if (enemy.x >= enemy.endX || enemy.x <= enemy.startX) {
+      enemy.direction *= -1;
+    }
+  });
+
+  drawMaze();
+}
     
 function drawMaze() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -1002,6 +1028,13 @@ if (lavaTiles[currentLevel]) {
   lavaTiles[currentLevel].forEach(lava => {
     ctx.font = "40px Arial";
     ctx.fillText("🌋", lava.x * tile + 8, lava.y * tile + 48);
+  });
+}
+
+if (enemies[currentLevel]) {
+  enemies[currentLevel].forEach(enemy => {
+    ctx.font = "40px Arial";
+    ctx.fillText(enemy.emoji, enemy.x * tile + 8, enemy.y * tile + 48);
   });
 }
   
@@ -1078,6 +1111,17 @@ if (lavaTiles[currentLevel]) {
     if (player.x === lava.x && player.y === lava.y) {
       player = { x: 1, y: 1 };
       showMessage("🌋 Oops! Back to start!");
+      drawMaze();
+      return;
+    }
+  }
+}
+
+if (enemies[currentLevel]) {
+  for (let enemy of enemies[currentLevel]) {
+    if (player.x === enemy.x && player.y === enemy.y) {
+      player = { x: 1, y: 1 };
+      showMessage("🐝 Oops! Back to start!");
       drawMaze();
       return;
     }
