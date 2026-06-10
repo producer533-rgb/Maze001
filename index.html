@@ -796,7 +796,20 @@ const moveSound = new Audio("move.mp3");
 let time = 0;
 let timerInterval;
 let timerStarted = false;
-let levelChanging = false;    
+let levelChanging = false;
+let hasKey = false;
+
+const levelKeys = {
+  3: { x: 2, y: 3, emoji: "🔑" },
+  4: { x: 6, y: 5, emoji: "🔑" },
+  5: { x: 3, y: 7, emoji: "🔑" }
+};
+
+const levelDoors = {
+  3: { x: 8, y: 1, emoji: "🚪" },
+  4: { x: 8, y: 8, emoji: "🚪" },
+  5: { x: 8, y: 1, emoji: "🚪" }
+};
 let bestTime = localStorage.getItem("bestTime");
 document.getElementById("bestTime").textContent =
   bestTime ? bestTime + " seconds" : "None yet";
@@ -949,6 +962,18 @@ ctx.drawImage(
     ctx.fillText(item.emoji, item.x * tile + 3, item.y * tile + 30);
   });
 
+if (levelKeys[currentLevel] && !hasKey) {
+  const key = levelKeys[currentLevel];
+  ctx.font = "40px Arial";
+  ctx.fillText(key.emoji, key.x * tile + 8, key.y * tile + 48);
+}
+
+if (levelDoors[currentLevel]) {
+  const door = levelDoors[currentLevel];
+  ctx.font = "40px Arial";
+  ctx.fillText(door.emoji, door.x * tile + 8, door.y * tile + 48);
+}
+  
   ctx.font = "40px Arial";
   ctx.fillText(playerEmoji, player.x * tile + 2, player.y * tile + 54);
 }
@@ -968,11 +993,20 @@ document.getElementById("messageBox").style.display = "none";
   const newX = player.x + dx;
   const newY = player.y + dy;
 
-  if (maze[newY][newX] !== 1) {
-    player.x = newX;
-    player.y = newY;
-    moveSound.play();
-  }
+let door = levelDoors[currentLevel];
+
+if (
+  door &&
+  newX === door.x &&
+  newY === door.y &&
+  !hasKey
+) {
+  showMessage("🚪 Find the key first!");
+} else if (maze[newY][newX] !== 1) {
+  player.x = newX;
+  player.y = newY;
+  moveSound.play();
+}
 
   collectibles = collectibles.filter(item => {
     if (item.x === player.x && item.y === player.y) {
@@ -994,6 +1028,16 @@ else {
     return true;
   });
 
+if (
+  levelKeys[currentLevel] &&
+  !hasKey &&
+  player.x === levelKeys[currentLevel].x &&
+  player.y === levelKeys[currentLevel].y
+) {
+  hasKey = true;
+  showMessage("🔑 You found the key!");
+}
+      
 if (maze[player.y][player.x] === 2) {
   levelChanging = true;
 
@@ -1042,6 +1086,7 @@ showMessage(message);
       maze = levels[currentLevel];
       player = { x: 1, y: 1 };
       collectibles = JSON.parse(JSON.stringify(levelCollectibles[currentLevel]));
+      hasKey = false;
 
       document.getElementById("levelDisplay").textContent =
          "Level " + (currentLevel + 1);    
