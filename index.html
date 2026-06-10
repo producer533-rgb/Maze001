@@ -13,7 +13,10 @@
   <p>Time: <span id="timer">0</span> seconds</p>
   <p>Best Time This Level: <span id="bestTime">None yet</span></p>
   <p>Score: <span id="score">0</span></p>
-
+  <button id="soundButton" onclick="toggleSound()">
+  🔊 Sound On
+  </button>
+  
 <div id="titleScreen">
   <h1>Choose Your Player</h1>
   <button onclick="startGameWithPlayer('🦖')">🦖 Dinosaur</button>
@@ -797,6 +800,7 @@ let time = 0;
 let timerInterval;
 let timerStarted = false;
 let levelChanging = false;
+let soundEnabled = true;    
 let hasKey = false;
 
 const levelKeys = {
@@ -817,6 +821,15 @@ document.getElementById("bestTime").textContent =
 document.getElementById("levelDisplay").textContent =
   "Level " + (currentLevel + 1);    
 
+function toggleSound() {
+
+  soundEnabled = !soundEnabled;
+
+  document.getElementById("soundButton").textContent =
+    soundEnabled ? "🔊 Sound On" : "🔇 Sound Off";
+
+}
+    
 function startTimer() {
   clearInterval(timerInterval);
 
@@ -1005,14 +1018,18 @@ if (
 } else if (maze[newY][newX] !== 1) {
   player.x = newX;
   player.y = newY;
+  if (soundEnabled) {
   moveSound.play();
+}
 }
 
   collectibles = collectibles.filter(item => {
     if (item.x === player.x && item.y === player.y) {
       score += item.points;
       document.getElementById("score").textContent = score;
-      collectSound.play();
+      if (soundEnabled) {
+  collectSound.play();
+}
       if (item.emoji === "💎") {
   showMessage("💎 WOW! A Sparkly Gem!");
 }
@@ -1063,7 +1080,9 @@ if (maze[player.y][player.x] === 2) {
   localStorage.setItem(bestTimeKey, levelTime);
 }
 
-    winSound.play();
+    if (soundEnabled) {
+  winSound.play();
+}
 
     setTimeout(() => {
 
