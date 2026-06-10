@@ -800,7 +800,17 @@ let time = 0;
 let timerInterval;
 let timerStarted = false;
 let levelChanging = false;
-let soundEnabled = true;    
+let soundEnabled = true; 
+const lavaTiles = {
+  6: [
+    { x: 3, y: 3 },
+    { x: 6, y: 5 }
+  ],
+  7: [
+    { x: 4, y: 5 },
+    { x: 7, y: 7 }
+  ]
+};    
 let hasKey = false;
 
 const levelKeys = {
@@ -986,6 +996,13 @@ if (levelDoors[currentLevel]) {
   ctx.font = "40px Arial";
   ctx.fillText(door.emoji, door.x * tile + 8, door.y * tile + 48);
 }
+
+if (lavaTiles[currentLevel]) {
+  lavaTiles[currentLevel].forEach(lava => {
+    ctx.font = "40px Arial";
+    ctx.fillText("🌋", lava.x * tile + 8, lava.y * tile + 48);
+  });
+}
   
   ctx.font = "40px Arial";
   ctx.fillText(playerEmoji, player.x * tile + 2, player.y * tile + 54);
@@ -1053,6 +1070,17 @@ if (
 ) {
   hasKey = true;
   showMessage("🔑 You found the key!");
+}
+
+if (lavaTiles[currentLevel]) {
+  for (let lava of lavaTiles[currentLevel]) {
+    if (player.x === lava.x && player.y === lava.y) {
+      player = { x: 1, y: 1 };
+      showMessage("🌋 Oops! Back to start!");
+      drawMaze();
+      return;
+    }
+  }
 }
       
 if (maze[player.y][player.x] === 2) {
