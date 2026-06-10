@@ -662,7 +662,7 @@ loadTile("rocks.png");
     [1,0,0,0,0,1,0,0,0,1],
     [1,1,1,1,0,1,1,1,0,1],
     [1,1,0,1,0,0,0,1,0,1],
-    [1,0,0,0,0,1,0,0,2,1],
+    [1,2,0,0,0,1,0,0,0,1],
     [1,1,1,1,1,1,1,1,1,1]
   ],
 
@@ -759,7 +759,7 @@ const levelCollectibles = [
   ],
   [
     { x: 3, y: 3, emoji: "⭐", points: 1 },
-    { x: 2, y: 8, emoji: "💎", points: 5 },
+    { x: 8, y: 8, emoji: "💎", points: 5 },
     { x: 8, y: 3, emoji: "🪙", points: 3 }
   ],
   [
@@ -804,15 +804,15 @@ let soundEnabled = true;
 let hasKey = false;
 
 const levelKeys = {
-  3: { x: 2, y: 3, emoji: "🔑" },
+  3: { x: 5, y: 5, emoji: "🔑" },
   4: { x: 6, y: 5, emoji: "🔑" },
   5: { x: 3, y: 7, emoji: "🔑" }
 };
 
 const levelDoors = {
-  3: { x: 8, y: 1, emoji: "🚪" },
-  4: { x: 8, y: 8, emoji: "🚪" },
-  5: { x: 8, y: 1, emoji: "🚪" }
+  3: { x: 2, y: 7, emoji: "🚪" },
+  4: { x: 3, y: 8, emoji: "🚪" },
+  5: { x: 7, y: 2, emoji: "🚪" }
 };
 let bestTime = localStorage.getItem("bestTime");
 document.getElementById("bestTime").textContent =
