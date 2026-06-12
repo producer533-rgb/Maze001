@@ -173,6 +173,9 @@ button {
     const pathImage = new Image();
     pathImage.src = "path.png";
 
+    const presentImage = new Image();
+    presentImage.src = "maze_house.png";
+
 const levelPathTiles = [
 
   // Level 1
@@ -1067,10 +1070,15 @@ ctx.drawImage(
 }
 }
 
-      if (maze[y][x] === 2) {
-        ctx.font = "36px Arial";
-        ctx.fillText("🎁", x * tile + 2, y * tile + 34);
-      }
+     if (maze[y][x] === 2) {
+  ctx.drawImage(
+    presentImage,
+    x * tile + 5,
+    y * tile + 5,
+    tile - 10,
+    tile - 10
+  );
+}
     }
   }
 
