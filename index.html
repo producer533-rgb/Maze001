@@ -147,6 +147,15 @@ button {
     const wallImage = new Image();
     wallImage.src = "wall.png";
 
+    const starImage = new Image();
+    starImage.src = "maze_star.png";
+
+    const gemImage = new Image();
+    gemImage.src = "maze_snail.png";
+
+    const coinImage = new Image();
+    coinImage.src = "maze_firefly.png";
+    
     const pathImage = new Image();
     pathImage.src = "path.png";
 
@@ -759,53 +768,53 @@ playerImage.src = "maze_boybug.png";
 
 const levelCollectibles = [
   [
-    { x: 3, y: 1, emoji: "⭐", points: 1 },
-    { x: 4, y: 5, emoji: "💎", points: 5 }
+    { x: 3, y: 1, image: "star", points: 1 },
+    { x: 4, y: 5, image: "gem, points: 5 }
   ],
   [
-    { x: 3, y: 4, emoji: "🪙", points: 3 },
-    { x: 5, y: 5, emoji: "💎", points: 5 },
-    { x: 7, y: 7, emoji: "⭐", points: 1 }
+    { x: 3, y: 4, image: "coin", points: 3 },
+    { x: 5, y: 5, image: "gem, points: 5 },
+    { x: 7, y: 7, image: "star", points: 1 }
   ],
   [
-    { x: 7, y: 1, emoji: "⭐", points: 1 },
-    { x: 1, y: 7, emoji: "💎", points: 5 },
-    { x: 8, y: 7, emoji: "🪙", points: 3 }
+    { x: 7, y: 1, image: "star", points: 1 },
+    { x: 1, y: 7, image: "gem, points: 5 },
+    { x: 8, y: 7, image: "coin", points: 3 }
   ],
   [
-    { x: 2, y: 3, emoji: "⭐", points: 1 },
-    { x: 8, y: 8, emoji: "💎", points: 5 },
-    { x: 7, y: 3, emoji: "🪙", points: 3 }
+    { x: 2, y: 3, image: "star", points: 1 },
+    { x: 8, y: 8, image: "gem, points: 5 },
+    { x: 7, y: 3, image: "coin", points: 3 }
   ],
   [
-    { x: 3, y: 3, emoji: "⭐", points: 1 },
-    { x: 8, y: 8, emoji: "💎", points: 5 },
-    { x: 8, y: 3, emoji: "🪙", points: 3 }
+    { x: 3, y: 3, image: "star", points: 1 },
+    { x: 8, y: 8, image: "gem, points: 5 },
+    { x: 8, y: 3, image: "coin", points: 3 }
   ],
   [
-    { x: 5, y: 1, emoji: "⭐", points: 1 },
-    { x: 3, y: 5, emoji: "💎", points: 5 },
-    { x: 7, y: 7, emoji: "🪙", points: 3 }
+    { x: 5, y: 1, image: "star", points: 1 },
+    { x: 3, y: 5, image: "gem, points: 5 },
+    { x: 7, y: 7, image: "coin", points: 3 }
   ],
   [
-    { x: 3, y: 1, emoji: "⭐", points: 1 },
-    { x: 5, y: 5, emoji: "💎", points: 5 },
-    { x: 8, y: 8, emoji: "🪙", points: 3 }
+    { x: 3, y: 1, image: "star", points: 1 },
+    { x: 5, y: 5, image: "gem, points: 5 },
+    { x: 8, y: 8, image: "coin", points: 3 }
   ],
   [
-    { x: 3, y: 3, emoji: "⭐", points: 1 },
-    { x: 7, y: 5, emoji: "💎", points: 5 },
-    { x: 3, y: 7, emoji: "🪙", points: 3 }
+    { x: 3, y: 3, image: "star", points: 1 },
+    { x: 7, y: 5, image: "gem, points: 5 },
+    { x: 3, y: 7, image: "coin", points: 3 }
   ],
   [
-    { x: 2, y: 1, emoji: "⭐", points: 1 },
-    { x: 5, y: 5, emoji: "💎", points: 5 },
-    { x: 8, y: 8, emoji: "🪙", points: 3 }
+    { x: 2, y: 1, image: "star", points: 1 },
+    { x: 5, y: 5, image: "gem, points: 5 },
+    { x: 8, y: 8, image: "coin", points: 3 }
   ],
   [
-    { x: 3, y: 1, emoji: "⭐", points: 1 },
-    { x: 5, y: 5, emoji: "💎", points: 5 },
-    { x: 1, y: 7, emoji: "🪙", points: 3 }
+    { x: 3, y: 1, image: "star", points: 1 },
+    { x: 5, y: 5, image: "gem, points: 5 },
+    { x: 1, y: 7, image: "coin", points: 3 }
   ]
 ];
 
@@ -939,14 +948,32 @@ function restartGame() {
   
   drawMaze();
   updateBestTimeDisplay();
-  collectibles.forEach(item => {
-  ctx.font = "30px Arial";
-  ctx.fillText(
-    item.emoji,
-    item.x * tile + 3,
-    item.y * tile + 30
+collectibles.forEach(item => {
+
+  let img;
+
+  if (item.image === "star") {
+    img = starImage;
+  }
+
+  if (item.image === "gem") {
+    img = gemImage;
+  }
+
+  if (item.image === "coin") {
+    img = coinImage;
+  }
+
+  ctx.drawImage(
+    img,
+    item.x * tile + 5,
+    item.y * tile + 5,
+    tile - 10,
+    tile - 10
   );
+
 });
+  
 }
 
 function showMessage(text) {
@@ -1112,14 +1139,23 @@ if (
       if (soundEnabled) {
   collectSound.play();
 }
-      if (item.emoji === "💎") {
-  showMessage("💎 WOW! A Sparkly Gem!");
+      if (item.image === "gem") {
+  showMessage(
+    "<img src='maze_snail.png' class='popupImage'><br>" +
+    "WOW! You Found the Sleepy Snail!"
+ );
 }
-else if (item.emoji === "🪙") {
-  showMessage("🪙 You found a Gold Coin!");
+else if (item.image === "coin") {
+  showMessage(
+    "<img src='maze_firefly.png' class='popupImage'><br>" +
+    "You Found the Friendly Firefly!"
+ );
 }
 else {
-  showMessage("⭐ Great job! You found a Star!");
+  showMessage(
+    "<img src='maze_star.png' class='popupImage'><br>" +
+    "Great job! You found the Star!"
+  );
 }
       return false;
     }
