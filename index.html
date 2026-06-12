@@ -139,7 +139,7 @@ button {
   <script>
     const canvas = document.getElementById("game");
     const ctx = canvas.getContext("2d");
-    ctx.imageSmoothingEnabled = false;
+    ctx.imageSmoothingEnabled = true;
     canvas.width = 600;
     canvas.height = 600;
 
@@ -1064,12 +1064,12 @@ if (enemies[currentLevel]) {
   });
 }
   
-  ctx.drawImage(
+ctx.drawImage(
   playerImage,
-  player.x * tile,
-  player.y * tile,
-  tile,
-  tile
+  player.x * tile - 5,
+  player.y * tile - 5,
+  tile + 10,
+  tile + 10
 );
 }
 
