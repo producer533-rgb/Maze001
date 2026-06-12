@@ -19,8 +19,17 @@
   
 <div id="titleScreen">
   <h1>Choose Your Player</h1>
-  <button onclick="startGameWithPlayer('Boy Bug')">🦖 Boy Bug</button>
-<button onclick="startGameWithPlayer('Girl Bug')">🐱 Girl Bug</button>
+  <button onclick="startGameWithPlayer('Boy Bug')">
+  <img src="Boy Bug for Maze.png" class="characterSelect">
+  <br>
+  Boy Bug
+</button>
+
+<button onclick="startGameWithPlayer('Girl Bug')">
+  <img src="Girl Bug for Maze.png" class="characterSelect">
+  <br>
+  Girl Bug
+</button>
 </div>
   
 <div id="gameArea">
@@ -79,6 +88,14 @@ button {
   padding: 15px 25px;
   margin: 10px;
   border-radius: 15px;
+}
+
+.characterSelect {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto 10px auto;
 }
     
 #gameArea {
