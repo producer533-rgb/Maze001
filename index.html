@@ -163,6 +163,12 @@ button {
 
     const coinImage = new Image();
     coinImage.src = "maze_firefly.png";
+
+    const keyImage = new Image();
+    keyImage.src = "maze_key.png";
+
+    const doorImage = new Image();
+    doorImage.src = "maze_door.png";
     
     const pathImage = new Image();
     pathImage.src = "path.png";
@@ -1094,14 +1100,26 @@ collectibles.forEach(item => {
 
 if (levelKeys[currentLevel] && !hasKey) {
   const key = levelKeys[currentLevel];
-  ctx.font = "40px Arial";
-  ctx.fillText(key.emoji, key.x * tile + 8, key.y * tile + 48);
+
+  ctx.drawImage(
+    keyImage,
+    key.x * tile + 5,
+    key.y * tile + 5,
+    tile - 10,
+    tile - 10
+  );
 }
 
 if (levelDoors[currentLevel]) {
   const door = levelDoors[currentLevel];
-  ctx.font = "40px Arial";
-  ctx.fillText(door.emoji, door.x * tile + 8, door.y * tile + 48);
+
+  ctx.drawImage(
+    doorImage,
+    door.x * tile + 5,
+    door.y * tile + 5,
+    tile - 10,
+    tile - 10
+  );
 }
 
 if (lavaTiles[currentLevel]) {
