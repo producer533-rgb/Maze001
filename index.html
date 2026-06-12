@@ -20,13 +20,13 @@
 <div id="titleScreen">
   <h1>Choose Your Player</h1>
   <button onclick="startGameWithPlayer('Boy Bug')">
-  <img src="Boy Bug for Maze.png" class="characterSelect">
+  <img src="maze_boybug.png" class="characterSelect">
   <br>
   Boy Bug
 </button>
 
 <button onclick="startGameWithPlayer('Girl Bug')">
-  <img src="Girl Bug for Maze.png" class="characterSelect">
+  <img src="maze_girlbug.png" class="characterSelect">
   <br>
   Girl Bug
 </button>
@@ -755,7 +755,7 @@ let currentLevel = 0;
 let maze = levels[currentLevel];
 let player = { x: 1, y: 1 };  
 let playerImage = new Image();
-playerImage.src = "Boy Bug for Maze.png";
+playerImage.src = "maze_boybug.png";
 
 const levelCollectibles = [
   [
@@ -887,11 +887,11 @@ function startTimer() {
 function startGameWithPlayer(character) {
 
   if (character === "Boy Bug") {
-    playerImage.src = "Boy Bug for Maze.png";
+    playerImage.src = "maze_boybug.png";
   }
 
   if (character === "Girl Bug") {
-    playerImage.src = "Girl Bug for Maze.png";
+    playerImage.src = "maze_girlbug for Maze.png";
   }
 
   document.getElementById("titleScreen").style.display = "none";
