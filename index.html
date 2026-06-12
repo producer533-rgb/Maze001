@@ -1215,7 +1215,11 @@ if (
   player.y === levelKeys[currentLevel].y
 ) {
   hasKey = true;
-  showMessage("🔑 You found the key!");
+
+  showMessage(
+    "<img src='maze_key.png' class='popupImage'><br>" +
+    "You Found the Magic Key!"
+  );
 }
 
 if (lavaTiles[currentLevel]) {
