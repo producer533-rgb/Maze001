@@ -1060,13 +1060,13 @@ ctx.drawImage(
   tile
 );
 } else {
-  ctx.drawImage(
-    pathImage,
-    x * tile,
-    y * tile,
-    tile,
-    tile
-  );
+ctx.drawImage(
+  presentImage,
+  x * tile,
+  y * tile,
+  tile + 10,
+  tile + 10
+);
 }
 }
 
