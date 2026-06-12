@@ -1060,10 +1060,29 @@ ctx.drawImage(
     }
   }
 
-  collectibles.forEach(item => {
-    ctx.font = "30px Arial";
-    ctx.fillText(item.emoji, item.x * tile + 3, item.y * tile + 30);
-  });
+collectibles.forEach(item => {
+  let img;
+
+  if (item.image === "star") {
+    img = starImage;
+  }
+
+  if (item.image === "gem") {
+    img = gemImage;
+  }
+
+  if (item.image === "coin") {
+    img = coinImage;
+  }
+
+  ctx.drawImage(
+    img,
+    item.x * tile + 5,
+    item.y * tile + 5,
+    tile - 10,
+    tile - 10
+  );
+});
 
 if (levelKeys[currentLevel] && !hasKey) {
   const key = levelKeys[currentLevel];
