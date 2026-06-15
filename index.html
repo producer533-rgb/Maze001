@@ -173,6 +173,9 @@ button {
     const pathImage = new Image();
     pathImage.src = "path.png";
 
+    const puddleImage = new Image();
+    puddleImage.src = "maze_puddle.png";
+
     const presentImage = new Image();
     presentImage.src = "maze_house.png";
 
@@ -847,7 +850,7 @@ let timerInterval;
 let timerStarted = false;
 let levelChanging = false;
 let soundEnabled = true; 
-const lavaTiles = {
+const puddleTiles = {
   6: [
     { x: 3, y: 4 },
     { x: 5, y: 3 }
@@ -1125,15 +1128,20 @@ if (levelDoors[currentLevel]) {
     doorImage,
     door.x * tile + 5,
     door.y * tile + 5,
-    tile - 10,
+    tile  10,
     tile - 10
   );
 }
 
-if (lavaTiles[currentLevel]) {
-  lavaTiles[currentLevel].forEach(lava => {
-    ctx.font = "40px Arial";
-    ctx.fillText("🌋", lava.x * tile + 8, lava.y * tile + 48);
+if (puddleTiles[currentLevel]) {
+  puddleTiles[currentLevel].forEach(lava => {
+    ctx.drawImage(
+      puddleImage,
+      lava.x * tile + 5,
+      lava.y * tile + 5,
+      tile - 10,
+      tile - 10
+    );
   });
 }
 
@@ -1230,11 +1238,14 @@ if (
   );
 }
 
-if (lavaTiles[currentLevel]) {
-  for (let lava of lavaTiles[currentLevel]) {
+if (puddleTiles[currentLevel]) {
+  for (let lava of puddleTiles[currentLevel]) {
     if (player.x === lava.x && player.y === lava.y) {
       player = { x: 1, y: 1 };
-      showMessage("🌋 Oops! Back to start!");
+      showMessage(
+  "<img src='maze_puddle.png' class='popupImage'><br>" +
+  "💦 Oh no! You fell in a puddle!"
+);
       drawMaze();
       return;
     }
