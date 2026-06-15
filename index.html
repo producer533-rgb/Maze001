@@ -865,7 +865,7 @@ const puddleTiles = {
 };
 const enemies = {
   8: [
-    { x: 1, y: 5, startX: 1, endX: 3, direction: 1 }
+    { x: 2, y: 1, startX: 2, endX: 4, direction: 1 }
   ],
   9: [
     { x: 5, y: 5, startX: 5, endX: 8, direction: 1 }
@@ -1171,12 +1171,23 @@ ctx.drawImage(
   });
 }
   
+ctx.beginPath();
+ctx.arc(
+  player.x * tile + tile / 2,
+  player.y * tile + tile / 2,
+  28,
+  0,
+  Math.PI * 2
+);
+ctx.fillStyle = "white";
+ctx.fill();
+
 ctx.drawImage(
   playerImage,
-  player.x * tile - 5,
-  player.y * tile - 5,
-  tile + 10,
-  tile + 10
+  player.x * tile + 2,
+  player.y * tile + 2,
+  tile - 4,
+  tile - 4
 );
 }
 
