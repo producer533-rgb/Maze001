@@ -999,13 +999,13 @@ collectibles.forEach(item => {
     img = coinImage;
   }
 
-  ctx.drawImage(
-    img,
-    item.x * tile - 5,
-    item.y * tile - 5,
-    tile + 10,
-    tile + 10
-  );
+ctx.drawImage(
+  img,
+  item.x * tile,
+  item.y * tile,
+  tile,
+  tile
+);
 
 });
   
