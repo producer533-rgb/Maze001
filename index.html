@@ -1154,13 +1154,15 @@ if (puddleTiles[currentLevel]) {
 
 if (enemies[currentLevel]) {
   enemies[currentLevel].forEach(enemy => {
- ctx.drawImage(
-  ghostImage,
-  enemy.x * tile + 2,
-  enemy.y * tile + 2,
-  tile - 4,
-  tile - 4
-);
+    ctx.drawImage(
+      ghostImage,
+      enemy.x * tile + 2,
+      enemy.y * tile + 2,
+      tile - 4,
+      tile - 4
+    );
+  });
+}
 
 ctx.drawImage(
   playerImage,
@@ -1170,7 +1172,6 @@ ctx.drawImage(
   tile - 4
 );
 }
-
     function movePlayer(dx, dy) {
 
     if (levelChanging) {
