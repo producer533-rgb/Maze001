@@ -1137,10 +1137,10 @@ if (puddleTiles[currentLevel]) {
   puddleTiles[currentLevel].forEach(lava => {
     ctx.drawImage(
       puddleImage,
-      lava.x * tile + 5,
-      lava.y * tile + 5,
-      tile - 10,
-      tile - 10
+      lava.x * tile - 5,
+      lava.y * tile - 5,
+      tile + 10,
+      tile + 10
     );
   });
 }
