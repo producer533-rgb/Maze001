@@ -1032,6 +1032,30 @@ function updateBestTimeDisplay() {
     savedBestTime ? savedBestTime + " seconds" : "None yet";
 }
 
+function checkEnemyCollision() {
+  if (enemies[currentLevel]) {
+    for (let enemy of enemies[currentLevel]) {
+      if (player.x === enemy.x && player.y === enemy.y) {
+        player = { x: 1, y: 1 };
+
+        showMessage(
+          "<img src='maze_ghost.png' class='popupImage'><br>" +
+          "A Ghost Got You! Back to Start!"
+        );
+
+        if (checkEnemyCollision()) {
+  return;
+}
+
+drawMaze();;
+        return true;
+      }
+    }
+  }
+
+  return false;
+}
+    
 function moveEnemies() {
   if (!enemies[currentLevel]) {
     return;
@@ -1255,7 +1279,7 @@ if (puddleTiles[currentLevel]) {
       player = levelStarts[currentLevel] || { x: 1, y: 1 };
       showMessage(
   "<img src='maze_puddle.png' class='popupImage'><br>" +
-  "💦 Oh no! You fell in a puddle!"
+  "Oh no! You fell in a puddle!"
 );
       drawMaze();
       return;
@@ -1263,6 +1287,10 @@ if (puddleTiles[currentLevel]) {
   }
 }
 
+if (checkEnemyCollision()) {
+  return;
+}
+      
 if (enemies[currentLevel]) {
   for (let enemy of enemies[currentLevel]) {
     if (player.x === enemy.x && player.y === enemy.y) {
