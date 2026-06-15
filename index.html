@@ -182,6 +182,10 @@ button {
     const presentImage = new Image();
     presentImage.src = "maze_house.png";
 
+    const levelStarts = {
+    8: { x: 1, y: 2 }
+   };
+
 const levelPathTiles = [
 
   // Level 1
@@ -931,7 +935,7 @@ function startGameWithPlayer(character) {
 
   currentLevel = 0;
   maze = levels[currentLevel];
-  player = { x: 1, y: 1 };
+  player = levelStarts[currentLevel] || { x: 1, y: 1 };
   collectibles = JSON.parse(JSON.stringify(levelCollectibles[currentLevel]));
   score = 0;
 
@@ -954,7 +958,7 @@ function restartGame() {
   "Level " + (currentLevel + 1);
   
   maze = levels[currentLevel];
-  player = { x: 1, y: 1 };
+  player = levelStarts[currentLevel] || { x: 1, y: 1 };
 
   clearInterval(timerInterval);
   time = 0;
@@ -1271,7 +1275,7 @@ if (
 if (puddleTiles[currentLevel]) {
   for (let lava of puddleTiles[currentLevel]) {
     if (player.x === lava.x && player.y === lava.y) {
-      player = { x: 1, y: 1 };
+      player = levelStarts[currentLevel] || { x: 1, y: 1 };
       showMessage(
   "<img src='maze_puddle.png' class='popupImage'><br>" +
   "💦 Oh no! You fell in a puddle!"
@@ -1285,7 +1289,7 @@ if (puddleTiles[currentLevel]) {
 if (enemies[currentLevel]) {
   for (let enemy of enemies[currentLevel]) {
     if (player.x === enemy.x && player.y === enemy.y) {
-      player = { x: 1, y: 1 };
+      player = levelStarts[currentLevel] || { x: 1, y: 1 };
       showMessage(
   "<img src='maze_ghost.png' class='popupImage'><br>" +
   "A Ghost Got You! Back to Start!"
