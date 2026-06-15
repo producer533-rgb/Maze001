@@ -1001,10 +1001,10 @@ collectibles.forEach(item => {
 
   ctx.drawImage(
     img,
-    item.x * tile + 5,
-    item.y * tile + 5,
-    tile - 10,
-    tile - 10
+    item.x * tile - 5,
+    item.y * tile - 5,
+    tile + 10,
+    tile + 10
   );
 
 });
