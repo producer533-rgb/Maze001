@@ -1154,37 +1154,13 @@ if (puddleTiles[currentLevel]) {
 
 if (enemies[currentLevel]) {
   enemies[currentLevel].forEach(enemy => {
- ctx.beginPath();
-ctx.arc(
-  enemy.x * tile + tile / 2,
-  enemy.y * tile + tile / 2,
-  28,
-  0,
-  Math.PI * 2
-);
-ctx.fillStyle = "white";
-ctx.fill();
-
-ctx.drawImage(
+ ctx.drawImage(
   ghostImage,
   enemy.x * tile + 2,
   enemy.y * tile + 2,
   tile - 4,
   tile - 4
 );
-  });
-}
-  
-ctx.beginPath();
-ctx.arc(
-  player.x * tile + tile / 2,
-  player.y * tile + tile / 2,
-  28,
-  0,
-  Math.PI * 2
-);
-ctx.fillStyle = "white";
-ctx.fill();
 
 ctx.drawImage(
   playerImage,
