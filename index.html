@@ -865,10 +865,10 @@ const puddleTiles = {
 };
 const enemies = {
   8: [
-    { x: 5, y: 5, startX: 5, endX: 8, y: 5, direction: 1, emoji: "👻" }
+    { x: 1, y: 5, startX: 1, endX: 3, direction: 1 }
   ],
   9: [
-    { x: 5, y: 5, startX: 5, endX: 8, y: 5, direction: 1, emoji: "👻" }
+    { x: 5, y: 5, startX: 5, endX: 8, direction: 1 }
   ]
 };
 
@@ -1150,13 +1150,24 @@ if (puddleTiles[currentLevel]) {
 
 if (enemies[currentLevel]) {
   enemies[currentLevel].forEach(enemy => {
-    ctx.drawImage(
-      ghostImage,
-      enemy.x * tile - 5,
-      enemy.y * tile - 5,
-      tile + 10,
-      tile + 10
-    );
+ ctx.beginPath();
+ctx.arc(
+  enemy.x * tile + tile / 2,
+  enemy.y * tile + tile / 2,
+  28,
+  0,
+  Math.PI * 2
+);
+ctx.fillStyle = "white";
+ctx.fill();
+
+ctx.drawImage(
+  ghostImage,
+  enemy.x * tile + 2,
+  enemy.y * tile + 2,
+  tile - 4,
+  tile - 4
+);
   });
 }
   
