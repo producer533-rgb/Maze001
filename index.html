@@ -1140,10 +1140,10 @@ if (puddleTiles[currentLevel]) {
   puddleTiles[currentLevel].forEach(lava => {
     ctx.drawImage(
       puddleImage,
-      lava.x * tile - 5,
-      lava.y * tile - 5,
-      tile + 10,
-      tile + 10
+      lava.x * tile + 5,
+      lava.y * tile + 5,
+      tile - 10,
+      tile - 10
     );
   });
 }
@@ -1325,6 +1325,10 @@ showMessage(message);
       player = { x: 1, y: 1 };
       collectibles = JSON.parse(JSON.stringify(levelCollectibles[currentLevel]));
       hasKey = false;
+
+      playerImage.onload = function() {
+        drawMaze();
+      };
 
       document.getElementById("levelDisplay").textContent =
          "Level " + (currentLevel + 1);    
