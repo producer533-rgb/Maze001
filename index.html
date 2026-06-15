@@ -176,6 +176,9 @@ button {
     const puddleImage = new Image();
     puddleImage.src = "maze_puddle.png";
 
+    const ghostImage = new Image();
+    ghostImage.src = "maze_ghost.png";
+
     const presentImage = new Image();
     presentImage.src = "maze_house.png";
 
@@ -1147,8 +1150,13 @@ if (puddleTiles[currentLevel]) {
 
 if (enemies[currentLevel]) {
   enemies[currentLevel].forEach(enemy => {
-    ctx.font = "40px Arial";
-    ctx.fillText(enemy.emoji, enemy.x * tile + 8, enemy.y * tile + 48);
+    ctx.drawImage(
+      ghostImage,
+      enemy.x * tile - 5,
+      enemy.y * tile - 5,
+      tile + 10,
+      tile + 10
+    );
   });
 }
   
@@ -1256,7 +1264,10 @@ if (enemies[currentLevel]) {
   for (let enemy of enemies[currentLevel]) {
     if (player.x === enemy.x && player.y === enemy.y) {
       player = { x: 1, y: 1 };
-      showMessage("🐝 Oops! Back to start!");
+      showMessage(
+  "<img src='ghost.png' class='popupImage'><br>" +
+  "A Ghost Got You! Back to Start!"
+);
       drawMaze();
       return;
     }
